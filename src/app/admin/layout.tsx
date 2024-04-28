@@ -14,4 +14,4 @@ export default function AdminLayout({
         <div className='container my-6'> {children}</div>
       </>
     );
-  }
+  } ;
