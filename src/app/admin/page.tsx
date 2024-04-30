@@ -1,14 +1,13 @@
 import React from 'react';
-import db from "@/app/db/db";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import db from '@/db/db';
+
 
 async function getSalesData() {
   
-    const data = await db.orders.aggregate ({
-
-        _sum: { pricePaidInCents: true }, 
+    const data = await db.order.aggregate ({
+        _sum: {pricePaidInCents: true}, 
         _count: true
-
      })
 
      return {
@@ -22,7 +21,7 @@ export default async function AdminDashboard() {
     return 
   ( <div className="grid grid-cols-1 md:grid-cols-2 lg: grid-cols-3 gap-4">
 
-<DashboardCard title="sales" subtitle={salesData.numberOfSales} body={salesData.amount}/>
+<DashboardCard title="sales" subtitle={salesData.numberOfSales} body={salesData.amount}/> 
   </div>
   )
 }
@@ -46,6 +45,6 @@ function DashboardCard({title, subtitle, body}:
             <p>{body}</p>
         </CardContent>
         
-            </Card>
+            </Card>
 
-    }
+    }
