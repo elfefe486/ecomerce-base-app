@@ -8,43 +8,42 @@ datasource db {
 }
 
 model Product {
-  id                   String    @id @default(uuid())
-  name                 String
-  priceincents         Int
-  filepath             String
-  imagepath            String
-  description          String
-  isavailableforpurchase Boolean   @default(true)
-  createdat            DateTime  @default(now())
-  updatedat            DateTime  @updatedAt
-  orders               Order[]
-  downloadVerifications DownloadVerification[]
+  id                    String                 @id @default(uuid())
+  name                  String
+  priceInCents          Int
+  filePath              String
+  imagePath             String
+  description           String
+  isAvailbleForPurchase Boolean                @default(true)
+  createdAt             DateTime               @default(now())
+  updateAt              DateTime               @updatedAt
+  orders                Order[]
+  downloadVerification  DownloadVerification[]
 }
 
 model User {
-  id        String    @id @default(uuid())
-  email     String    @unique
-  createdat DateTime  @default(now())
-  updatedat DateTime  @updatedAt
-  orders    Order[]
+  id        String   @id @default(uuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+  order     Order[]
 }
 
 model Order {
-  id            String   @id @default(uuid())
-  priceincents  Int
-  createdat     DateTime @default(now())
-  updatedat     DateTime @updatedAt
-  userid        String
-  productid     String
-  user          User     @relation(fields: [userid], references: [id], onDelete: Cascade)
-  product       Product  @relation(fields: [productid], references: [id], onDelete: Restrict)
+  id               String   @id @default(uuid())
+  pricePaidInCents Int
+  createdAt        DateTime @default(now())
+  updateAt         DateTime @updatedAt
+  userId    String
+  productId String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
 }
 
 model DownloadVerification {
-  id            String   @id @default(uuid())
-  expiresAt     DateTime
-  createdat     DateTime @default(now())
-  productId     String
-  product       Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+  id        String   @id @default(uuid())
+  expiredAt DateTime
+  createdAt DateTime @default(now())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
 }
-
